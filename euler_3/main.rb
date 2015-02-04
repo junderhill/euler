@@ -1,24 +1,14 @@
-require "prime"
+target = 600851475143
 
-TARGET = 600851475143
-
-def is_factor(num)
-  if TARGET % num == 0
-    true
-  else
-    false
+maxFactor = 1
+(3..target).step(2) do |n|
+  while target % n == 0
+    maxFactor = n
+    target = target / n
+  end
+  if maxFactor > target
+    break
   end
 end
 
-
-calculate_prime_factors(TARGET)
-
-def calculate_prime_factors(target)
-  half = target/2
-  for i in (half).downto(0)
-    if Prime.instance.prime?(i) and is_factor(i)
-      puts "Prime factor... #{i}"
-      break
-    end
-  end
-end
+puts maxFactor
